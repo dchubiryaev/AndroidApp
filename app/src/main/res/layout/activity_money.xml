@@ -69,6 +69,7 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:text="Balance"
+                android:fontFamily="casual"
                 />
             <TextView
                 android:id="@+id/textBalance"
@@ -77,8 +78,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Balance"
+                android:fontFamily="casual"
                 />
         </LinearLayout>
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="395dp"
             android:layout_height="200dp"
@@ -104,6 +107,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Balance"
+                android:fontFamily="casual"
                 />
             <TextView
                 android:id="@+id/textRealBalance"
@@ -112,8 +116,55 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Balance"
+                android:fontFamily="casual"
                 />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/button_spent"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dip"
+                android:textSize="40dp"
+                android:textAllCaps="false"
+                android:fontFamily="casual"
+                android:background="@drawable/outline_background"
+                android:drawableLeft="@drawable/spent"
+                android:text="Spent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:padding="10dip"
+                android:onClick="ButtonSpent" />
+
+            <Button
+                android:id="@+id/button_got"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_margin="30dip"
+                android:textSize="40dp"
+                android:textAllCaps="false"
+                android:fontFamily="casual"
+                android:background="@drawable/outline_background"
+                android:drawableLeft="@drawable/gotmoney"
+                android:text="Got money"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85"
+                app:layout_constraintRight_toRightOf="parent"
+                android:padding="10dip"
+                android:onClick="ButtonGot" />
+
+        </LinearLayout>
+
+
+
 
 
 

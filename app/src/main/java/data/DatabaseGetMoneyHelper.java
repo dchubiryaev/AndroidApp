@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.view.SoundEffectConstants;
 
 import com.calculator.poverty.dog.povertycalculator.money.ListGetMoney;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
@@ -23,9 +22,9 @@ import java.util.List;
  * Created by DoG on 14.10.2017.
  */
 
-public class DatabaseGetMoneyHelper extends SQLiteOpenHelper  {
+public class DatabaseGetMoneyHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 11;
 
     private static String DB_NAME = "mydata.db";
     private static String DB_PATH = "";

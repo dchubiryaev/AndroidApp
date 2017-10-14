@@ -3,10 +3,9 @@ package data;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
-import android.util.Log;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 
@@ -19,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseSpentHelper extends SQLiteOpenHelper {
-
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 11;
 
     private static String DB_NAME = "mydata.db";
     private static String DB_PATH = "";

@@ -1,24 +1,22 @@
 package com.calculator.poverty.dog.povertycalculator.money;
 
 ;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.TextView;
 import com.calculator.poverty.dog.povertycalculator.R;
+import com.calculator.poverty.dog.povertycalculator.money.inmoney.GotMoney;
+import com.calculator.poverty.dog.povertycalculator.money.inmoney.Spent;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.io.IOException;
-import java.util.List;
-
 import data.Calculation;
-import data.DatabaseGetMoneyHelper;
-import data.DatabaseSpentHelper;
+
 
 public class Money extends AppCompatActivity {
 
@@ -31,7 +29,17 @@ public class Money extends AppCompatActivity {
         calculation = new Calculation(this);
         setText();
         setGraph();
-        setButtonSpent();
+    }
+
+    public void ButtonSpent(View view){
+        Intent intent = new Intent(Money.this, Spent.class);
+        startActivity(intent);
+    }
+
+    public void ButtonGot(View view)
+    {
+        Intent intObj = new Intent(this, GotMoney.class);
+        startActivity(intObj);
     }
 
     private void setGraph() {
@@ -63,12 +71,4 @@ public class Money extends AppCompatActivity {
         textRealBalance.setTextColor(Color.rgb(0,0,0));//black color
         textRealBalance.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
     }
-
-    private void setButtonSpent(){
-
-    }
-
-
-
-
 }

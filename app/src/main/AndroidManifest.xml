@@ -17,10 +17,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".money.Money" />
+        <activity android:name=".money.inmoney.Spent" />
+        <activity android:name=".money.inmoney.GotMoney" />
         <activity
             android:name=".tasks.Tasks"
             android:label="@string/title_activity_tasks"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="res.la.MainActivity"></activity>
     </application>
 
 </manifest>
