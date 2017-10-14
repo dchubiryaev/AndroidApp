@@ -35,4 +35,5 @@ public class StartPage extends AppCompatActivity {
         Intent intObj = new Intent(this, Tasks.class);
         startActivity(intObj);
     }
+//    Toast.makeText(getBaseContext(), "Time = " +date.toString(), Toast.LENGTH_SHORT).show();
 }

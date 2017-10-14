@@ -17,14 +17,9 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseSpentHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 11;
+import static data.Database.DB_PATH;
 
-    private static String DB_NAME = "mydata.db";
-    private static String DB_PATH = "";
-    private SQLiteDatabase mDataBase;
-    private final Context mContext;
-    private boolean mNeedUpdate = false;
+public class DatabaseSpentHelper extends Database {
 
     private static final String TABLE_SPENT = "spent";
     private static final String KEY_ID = "_id";
@@ -35,54 +30,7 @@ public class DatabaseSpentHelper extends SQLiteOpenHelper {
     private static final String KEY_FLAG = "flag";
 
     public DatabaseSpentHelper(Context context) {
-        super(context, DB_NAME, null, DATABASE_VERSION);
-        if (android.os.Build.VERSION.SDK_INT >= 17)
-            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
-        else
-            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-        this.mContext = context;
-        copyDataBase();
-        this.getReadableDatabase();
-    }
-
-    public void updateDataBase() throws IOException {
-        if (mNeedUpdate) {
-            File dbFile = new File(DB_PATH + DB_NAME);
-            if (dbFile.exists())
-                dbFile.delete();
-            copyDataBase();
-            mNeedUpdate = false;
-        }
-    }
-
-    private boolean checkDataBase() {
-        File dbFile = new File(DB_PATH + DB_NAME);
-        return dbFile.exists();
-    }
-
-    private void copyDataBase() {
-        if (!checkDataBase()) {
-            this.getReadableDatabase();
-            this.close();
-            try {
-                copyDBFile();
-            } catch (IOException mIOException) {
-                throw new Error("ErrorCopyingDataBase");
-            }
-        }
-    }
-
-    private void copyDBFile() throws IOException {
-        InputStream mInput = mContext.getAssets().open(DB_NAME);
-        //InputStream mInput = mContext.getResources().openRawResource(R.raw.info);
-        OutputStream mOutput = new FileOutputStream(DB_PATH + DB_NAME);
-        byte[] mBuffer = new byte[1024];
-        int mLength;
-        while ((mLength = mInput.read(mBuffer)) > 0)
-            mOutput.write(mBuffer, 0, mLength);
-        mOutput.flush();
-        mOutput.close();
-        mInput.close();
+        super(context);
     }
 
     public boolean openDataBase() throws SQLException {
@@ -90,36 +38,17 @@ public class DatabaseSpentHelper extends SQLiteOpenHelper {
         return mDataBase != null;
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-    }
-
-    @Override
-    public synchronized void close() {
-        if (mDataBase != null)
-            mDataBase.close();
-        super.close();
-    }
-
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (newVersion > oldVersion)
-            mNeedUpdate = true;
-    }
-
     public void addSpent(ListMoney listMoney) {
-        System.out.println("in addSpent");
+        System.out.println("put to value");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        System.out.println("put category");
+
         values.put(KEY_CATEGORY, listMoney.getCategory());
         values.put(KEY_THING, listMoney.getThing());
         values.put(KEY_DATE, listMoney.getDate());
         values.put(KEY_MONEY, listMoney.getMoney());
         values.put(KEY_FLAG, listMoney.getSpent());
-        System.out.println("insert method");
-
+        System.out.println("insert");
         db.insert(TABLE_SPENT, null, values);
         db.close();
     }
