@@ -1,4 +1,4 @@
-package com.calculator.poverty.dog.povertycalculator.money;
+package data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.SoundEffectConstants;
+
+import com.calculator.poverty.dog.povertycalculator.money.ListGetMoney;
+import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,37 +19,34 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-class DatabaseHelper extends SQLiteOpenHelper {
-    //
+/**
+ * Created by DoG on 14.10.2017.
+ */
+
+public class DatabaseGetMoneyHelper extends SQLiteOpenHelper  {
+
+    private static final int DATABASE_VERSION = 9;
+
     private static String DB_NAME = "mydata.db";
-    private static String DB_PATH = ""; // полный путь к базе данных
+    private static String DB_PATH = "";
     private SQLiteDatabase mDataBase;
     private final Context mContext;
     private boolean mNeedUpdate = false;
-   // private static final int SCHEMA = 1; // версия базы данных
-    //
 
-    private static final int DATABASE_VERSION = 8;
-   // private static String DB_NAME = "mydata";
-    private static final String TABLE_SPENT = "spent";
+    private static final String TABLE_GET = "getMoney";
     private static final String KEY_ID = "_id";
     private static final String KEY_CATEGORY = "category";
-    private static final String KEY_THING = "thing";
-    private static final String KEY_DATE = "date";
     private static final String KEY_MONEY = "money";
-    private static final String KEY_FLAG = "flag";
+    private static final String KEY_DATE = "date";
 
-    DatabaseHelper(Context context) {
+    public DatabaseGetMoneyHelper(Context context) {
         super(context, DB_NAME, null, DATABASE_VERSION);
-        //DB_PATH = context.getFilesDir().getPath() + DB_NAME;
         if (android.os.Build.VERSION.SDK_INT >= 17)
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
         else
             DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
         this.mContext = context;
-
         copyDataBase();
-
         this.getReadableDatabase();
     }
 
@@ -54,9 +55,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
             File dbFile = new File(DB_PATH + DB_NAME);
             if (dbFile.exists())
                 dbFile.delete();
-
             copyDataBase();
-
             mNeedUpdate = false;
         }
     }
@@ -77,9 +76,9 @@ class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
     }
+
     private void copyDBFile() throws IOException {
         InputStream mInput = mContext.getAssets().open(DB_NAME);
-        //InputStream mInput = mContext.getResources().openRawResource(R.raw.info);
         OutputStream mOutput = new FileOutputStream(DB_PATH + DB_NAME);
         byte[] mBuffer = new byte[1024];
         int mLength;
@@ -97,7 +96,6 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
     }
 
     @Override
@@ -114,60 +112,68 @@ class DatabaseHelper extends SQLiteOpenHelper {
             mNeedUpdate = true;
     }
 
-    public void addSpent(ListMoney listMoney) {
-        System.out.println("in addSpent");
+    public void addSpent(ListGetMoney listGetMoney) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        System.out.println("put category");
-        values.put(KEY_CATEGORY, listMoney.getCategory());
-        values.put(KEY_THING, listMoney.getThing());
-        values.put(KEY_DATE, listMoney.getDate());
-        values.put(KEY_MONEY, listMoney.getMoney());
-        values.put(KEY_FLAG, listMoney.getSpent());
-        System.out.println("insert method");
-
-        db.insert(TABLE_SPENT, null, values);
+        values.put(KEY_CATEGORY, listGetMoney.getCategory());
+        values.put(KEY_MONEY, listGetMoney.getDate());
+        values.put(KEY_DATE, listGetMoney.getMoney());
+        db.insert(TABLE_GET, null, values);
         db.close();
     }
 
-    public ListMoney getSpent(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_SPENT, new String[] { KEY_ID,
-                        KEY_CATEGORY, KEY_THING, KEY_DATE, KEY_MONEY, KEY_FLAG}, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-
-        if (cursor != null){
-            cursor.moveToFirst();
-        }
-
-        ListMoney listMoney = new ListMoney(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
-
-        return listMoney;
-    }
-
-    public List<ListMoney> getAllSpent() {
+    public int getSumEarnedMoney(){
+        int balance = 0;
         List<ListMoney> spentList = new ArrayList<ListMoney>();
-        String selectQuery = "SELECT  * FROM " + TABLE_SPENT;
+        String selectQuery = "SELECT  * FROM " + TABLE_GET;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
         if (cursor.moveToFirst()) {
             do {
-                ListMoney listMoney = new ListMoney();
-                listMoney.setID(Integer.parseInt(cursor.getString(0)));
-                listMoney.setCategory(cursor.getString(1));
-                listMoney.setThing(cursor.getString(2));
-                listMoney.setDate(cursor.getString(3));
-                listMoney.setMoney(cursor.getString(4));
-                listMoney.setSpent(cursor.getString(5));
-                spentList.add(listMoney);
+                balance += Integer.parseInt(cursor.getString(2));
             } while (cursor.moveToNext());
         }
-
-        return spentList;
+        return balance;
     }
 
+//    public ListGetMoney getSpent(int id) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        Cursor cursor = db.query(TABLE_SPENT, new String[] { KEY_ID,
+//                        KEY_CATEGORY, KEY_DATE, KEY_MONEY,}, KEY_ID + "=?",
+//                new String[] { String.valueOf(id) }, null, null, null, null);
+//
+//        if (cursor != null){
+//            cursor.moveToFirst();
+//        }
+//
+//        ListGetMoney listGetMoney = new ListGetMoney(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+//
+//        return listGetMoney;
+//    }
+//
+//    public List<ListMoney> getAllSpent() {
+//        List<ListMoney> spentList = new ArrayList<ListMoney>();
+//        String selectQuery = "SELECT  * FROM " + TABLE_SPENT;
+//
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                ListMoney listMoney = new ListMoney();
+//                listMoney.setID(Integer.parseInt(cursor.getString(0)));
+//                listMoney.setCategory(cursor.getString(1));
+//                listMoney.setThing(cursor.getString(2));
+//                listMoney.setDate(cursor.getString(3));
+//                listMoney.setMoney(cursor.getString(4));
+//                listMoney.setSpent(cursor.getString(5));
+//                spentList.add(listMoney);
+//            } while (cursor.moveToNext());
+//        }
+//        return spentList;
+//    }
+//
 
 }

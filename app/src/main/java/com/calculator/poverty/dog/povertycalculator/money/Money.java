@@ -1,16 +1,12 @@
 package com.calculator.poverty.dog.povertycalculator.money;
 
 ;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import com.calculator.poverty.dog.povertycalculator.R;
 import com.jjoe64.graphview.GraphView;
@@ -20,20 +16,22 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.io.IOException;
 import java.util.List;
 
-import static com.calculator.poverty.dog.povertycalculator.R.drawable.money;
+import data.Calculation;
+import data.DatabaseGetMoneyHelper;
+import data.DatabaseSpentHelper;
 
 public class Money extends AppCompatActivity {
 
-    private DatabaseHelper db;
-    private SQLiteDatabase mDb;
+    private Calculation calculation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_money);
+        calculation = new Calculation(this);
         setText();
         setGraph();
+        setButtonSpent();
     }
 
     private void setGraph() {
@@ -52,7 +50,7 @@ public class Money extends AppCompatActivity {
         textBal.setTextColor(Color.rgb(0,0,0));//black color
         textBal.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
         TextView textBalance = (TextView)findViewById(R.id.textBalance); // Инициализируем компонент
-        textBalance.setText("150");// задаём текст
+        textBalance.setText("" + calculation.getBalance());// задаём текст
         textBalance.setTextColor(Color.rgb(0,0,0));//black color
         textBalance.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
 
@@ -61,40 +59,16 @@ public class Money extends AppCompatActivity {
         textRealBal.setTextColor(Color.rgb(0,0,0));//black color
         textRealBal.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
         TextView textRealBalance = (TextView)findViewById(R.id.textRealBalance); // Инициализируем компонент
-        textRealBalance.setText(getNumber());// задаём текст
+        textRealBalance.setText(""+calculation.getBalanceForSpenting());// задаём текст
         textRealBalance.setTextColor(Color.rgb(0,0,0));//black color
         textRealBalance.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
     }
 
-    public String getNumber() {
+    private void setButtonSpent(){
 
-        db = new DatabaseHelper(this);
-
-        try {
-            db.updateDataBase();
-        } catch (IOException mIOException) {
-            throw new Error("UnableToUpdateDatabase");
-        }
-
-        try {
-            mDb = db.getWritableDatabase();
-        } catch (SQLException mSQLException) {
-            throw mSQLException;
-        }
-
-        db.addSpent(new ListMoney("food", "apple", "14.10.2017", "30", "true"));
-
-        System.out.println("Inserting ..");
-
-        System.out.println("Reading all contacts..");
-        List<ListMoney> listMoneys = db.getAllSpent();
-        for (ListMoney cn : listMoneys) {
-            String log = "Id: "+cn.getID()+" ,Money: " + cn.getMoney() + " ,Thing: " + cn.getThing();
-            System.out.print("Name: ");
-            System.out.println(log);
-        }
-        return "2";
     }
+
+
 
 
 }
