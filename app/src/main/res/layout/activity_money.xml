@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.calculator.poverty.dog.povertycalculator.money.Money">
+
+
+    <!--
+
+
+
+
+
+    <Button
+        android:id="@+id/button_do"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
+        android:background="@drawable/outline_background"
+        android:drawableLeft="@drawable/money"
+        android:text="money"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="10dip"
+        android:layout_marginEnd="20dp"
+        android:onClick="ButtonClick" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="173dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteY="463dp"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="270dp" />
+-->
+    <LinearLayout
+        android:layout_width="395dp"
+        android:layout_height="590dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <LinearLayout
+            android:layout_width="395dp"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            >
+
+            <TextView
+                android:id="@+id/textBal"
+                android:gravity="left"
+                android:layout_gravity="left"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:text="Balance"
+                />
+            <TextView
+                android:id="@+id/textBalance"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Balance"
+                />
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="395dp"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:visibility="visible" >
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph"
+                android:layout_width="match_parent"
+                android:layout_height="200dip" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="395dp"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textRealBal"
+                android:gravity="left"
+                android:layout_gravity="left"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Balance"
+                />
+            <TextView
+                android:id="@+id/textRealBalance"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Balance"
+                />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
