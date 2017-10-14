@@ -2,6 +2,7 @@ package com.calculator.poverty.dog.povertycalculator.money;
 
 ;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -16,11 +17,15 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.io.IOException;
 import java.util.List;
 
 import static com.calculator.poverty.dog.povertycalculator.R.drawable.money;
 
 public class Money extends AppCompatActivity {
+
+    private DatabaseHelper db;
+    private SQLiteDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +68,19 @@ public class Money extends AppCompatActivity {
 
     public String getNumber() {
 
-        DatabaseHelper db = new DatabaseHelper(this);
+        db = new DatabaseHelper(this);
+
+        try {
+            db.updateDataBase();
+        } catch (IOException mIOException) {
+            throw new Error("UnableToUpdateDatabase");
+        }
+
+        try {
+            mDb = db.getWritableDatabase();
+        } catch (SQLException mSQLException) {
+            throw mSQLException;
+        }
 
         db.addSpent(new ListMoney("food", "apple", "14.10.2017", "30", "true"));
 
