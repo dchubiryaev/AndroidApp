@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.money.inmoney.GotMoney;
+import com.calculator.poverty.dog.povertycalculator.money.inmoney.MoneyBox;
+import com.calculator.poverty.dog.povertycalculator.money.inmoney.Settings;
 import com.calculator.poverty.dog.povertycalculator.money.inmoney.Spent;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -39,6 +41,18 @@ public class Money extends AppCompatActivity {
     public void ButtonGot(View view)
     {
         Intent intObj = new Intent(this, GotMoney.class);
+        startActivity(intObj);
+    }
+
+    public void ButtonSettings (View view)
+    {
+        Intent intObj = new Intent(this, Settings.class);
+        startActivity(intObj);
+    }
+
+    public void ButtonMoneyBox(View view)
+    {
+        Intent intObj = new Intent(this, MoneyBox.class);
         startActivity(intObj);
     }
 

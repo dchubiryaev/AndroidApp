@@ -19,6 +19,8 @@
         <activity android:name=".money.Money" />
         <activity android:name=".money.inmoney.Spent" />
         <activity android:name=".money.inmoney.GotMoney" />
+        <activity android:name=".money.inmoney.MoneyBox" />
+        <activity android:name=".money.inmoney.Settings" />
         <activity
             android:name=".tasks.Tasks"
             android:label="@string/title_activity_tasks"
