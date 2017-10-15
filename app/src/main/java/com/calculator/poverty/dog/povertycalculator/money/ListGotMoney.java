@@ -4,23 +4,23 @@ package com.calculator.poverty.dog.povertycalculator.money;
  * Created by DoG on 14.10.2017.
  */
 
-public class ListGetMoney {
+public class ListGotMoney {
     int _id;
     String category;
     String money;
     String date;
 
-    public ListGetMoney(){
+    public ListGotMoney(){
     }
 
-    public ListGetMoney (int id, String category, String date, String money) {
+    public ListGotMoney (int id, String category, String date, String money) {
         this._id = id;
         this.category = category;
         this.money = money;
         this.date = date;
     }
 
-    public ListGetMoney(String category, String date, String money) {
+    public ListGotMoney(String category, String date, String money) {
         this.category = category;
         this.date = date;
         this.money = money;

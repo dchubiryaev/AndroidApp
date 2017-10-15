@@ -17,15 +17,16 @@ public class DatabaseSpinnerHelper extends Database  {
     private static final String TABLE_CATEGORY = "category";
     private static final String KEY_ID = "_id";
     private static final String KEY_NAME = "name";
+    private static final String KEY_CATEGORY = "category";
 
     public DatabaseSpinnerHelper(Context context) {
         super(context);
     }
 
-    public String[] getCategory(){
+    public String[] getCategorySpent(){
         ArrayList<String> category = new  ArrayList();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY;
+        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY + " WHERE " + KEY_CATEGORY + " IN ('spent')";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -42,5 +43,23 @@ public class DatabaseSpinnerHelper extends Database  {
         return arr;
     }
 
+    public String[] getCategoryGot(){
+        ArrayList<String> category = new  ArrayList();
 
+        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY + " WHERE " + KEY_CATEGORY + " IN ('got')";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                category.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        int count = category.size();
+        String[] arr = new String[count];
+        for (int i = 0; i < count ; i++) {
+            arr[i] = category.get(i);
+        }
+        return arr;
+    }
 }

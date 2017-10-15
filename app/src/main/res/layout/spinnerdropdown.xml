@@ -19,6 +19,7 @@
         android:gravity="center"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:background="@drawable/outline_background"
         />
 
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.calculator.poverty.dog.povertycalculator.money.inmoney;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
@@ -18,7 +16,6 @@ import com.calculator.poverty.dog.povertycalculator.money.Money;
 import java.util.Date;
 
 import data.Calculation;
-import data.DatabaseSpinnerHelper;
 import data.Lists;
 
 /**
@@ -27,8 +24,6 @@ import data.Lists;
 
 public class Spent extends AppCompatActivity {
 
-    private DatabaseSpinnerHelper getMoneyHelper;
-    private SQLiteDatabase sqLiteDatabaseGetMoneyHelper;
     private String choseCategory;
     private String money;
     private String comment;
@@ -45,20 +40,20 @@ public class Spent extends AppCompatActivity {
     public void setSpentMoney (View view) {
         TextView getMoney = (TextView) findViewById(R.id.setSpentMoneyText);
         money = getMoney.getText().toString();
-
         TextView getComment = (TextView) findViewById(R.id.setSpentMoneyCommentText);
         comment = getComment.getText().toString();
         date = new Date();
         ListMoney listMoney = new ListMoney(choseCategory, comment, date.toString(), money, "true");
         Calculation calculation = new Calculation(this);
-        calculation.addSend(listMoney);
+
+        calculation.addSpent(listMoney);
         Intent intent = new Intent(Spent.this, Money.class);
         startActivity(intent);
     }
 
     public void setSpinner(){
         final Lists category = new Lists(this);
-        String[] data = category.getCategory();
+        String[] data = category.getCategorySpent();
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinnerstart, R.id.categoryname, data);
         adapter.setDropDownViewResource(R.layout.spinnerdropdown);

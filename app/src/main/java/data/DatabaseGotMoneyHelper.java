@@ -5,16 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-import com.calculator.poverty.dog.povertycalculator.money.ListGetMoney;
+import com.calculator.poverty.dog.povertycalculator.money.ListGotMoney;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +16,7 @@ import java.util.List;
  * Created by DoG on 14.10.2017.
  */
 
-public class DatabaseGetMoneyHelper extends Database {
+public class DatabaseGotMoneyHelper extends Database {
 
     private static final String TABLE_GET = "getMoney";
     private static final String KEY_ID = "_id";
@@ -30,7 +24,7 @@ public class DatabaseGetMoneyHelper extends Database {
     private static final String KEY_MONEY = "money";
     private static final String KEY_DATE = "date";
 
-    public DatabaseGetMoneyHelper(Context context) {
+    public DatabaseGotMoneyHelper(Context context) {
         super(context);
     }
 
@@ -38,16 +32,6 @@ public class DatabaseGetMoneyHelper extends Database {
     public boolean openDataBase() throws SQLException {
         mDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
         return mDataBase != null;
-    }
-
-    public void addSpent(ListGetMoney listGetMoney) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(KEY_CATEGORY, listGetMoney.getCategory());
-        values.put(KEY_MONEY, listGetMoney.getDate());
-        values.put(KEY_DATE, listGetMoney.getMoney());
-        db.insert(TABLE_GET, null, values);
-        db.close();
     }
 
     public int getSumEarnedMoney(){
@@ -63,6 +47,17 @@ public class DatabaseGetMoneyHelper extends Database {
             } while (cursor.moveToNext());
         }
         return balance;
+    }
+
+    public void addGot(ListGotMoney listMoney) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_CATEGORY, listMoney.getCategory());
+        values.put(KEY_DATE, listMoney.getDate());
+        values.put(KEY_MONEY, listMoney.getMoney());
+        System.out.println("insert");
+        db.insert(TABLE_GET, null, values);
+        db.close();
     }
 
 //    public ListGetMoney getSpent(int id) {

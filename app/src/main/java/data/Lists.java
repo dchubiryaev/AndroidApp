@@ -32,8 +32,12 @@ public class Lists {
         }
     }
 
-    public String[] getCategory () {
-        return spinnerHelper.getCategory();
+    public String[] getCategorySpent () {
+        return spinnerHelper.getCategorySpent();
+    }
+
+    public String[] getCategoryGot () {
+        return spinnerHelper.getCategoryGot();
     }
 
 }

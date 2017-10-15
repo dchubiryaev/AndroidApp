@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.calculator.poverty.dog.povertycalculator.money.ListGotMoney;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
-import com.calculator.poverty.dog.povertycalculator.money.Money;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class Calculation {
 
-    private DatabaseGetMoneyHelper getMoneyHelper;
+    private DatabaseGotMoneyHelper getMoneyHelper;
     private SQLiteDatabase sqLiteDatabaseGetMoneyHelper;
     private DatabaseSpentHelper dataSpentHelper;
     private SQLiteDatabase sqLiteDatabaseSpentHelper;
@@ -25,7 +25,7 @@ public class Calculation {
 
     public Calculation (Context context) {
         //ADD DATABASE
-        getMoneyHelper = new DatabaseGetMoneyHelper(context);
+        getMoneyHelper = new DatabaseGotMoneyHelper(context);
         dataSpentHelper = new DatabaseSpentHelper(context);
         try {
             getMoneyHelper.updateDataBase();
@@ -65,9 +65,12 @@ public class Calculation {
         return 0;
     }
 
-    public void addSend (ListMoney listMoney) {
-        System.out.println("in add send");
+    public void addSpent(ListMoney listMoney) {
         dataSpentHelper.addSpent(listMoney);
+    }
+
+    public void addGot (ListGotMoney listGotMoney) {
+        getMoneyHelper.addGot(listGotMoney);
     }
 
     public String getNumber() {

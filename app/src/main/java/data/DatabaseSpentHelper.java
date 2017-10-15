@@ -39,16 +39,13 @@ public class DatabaseSpentHelper extends Database {
     }
 
     public void addSpent(ListMoney listMoney) {
-        System.out.println("put to value");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
         values.put(KEY_CATEGORY, listMoney.getCategory());
         values.put(KEY_THING, listMoney.getThing());
         values.put(KEY_DATE, listMoney.getDate());
         values.put(KEY_MONEY, listMoney.getMoney());
         values.put(KEY_FLAG, listMoney.getSpent());
-        System.out.println("insert");
         db.insert(TABLE_SPENT, null, values);
         db.close();
     }
