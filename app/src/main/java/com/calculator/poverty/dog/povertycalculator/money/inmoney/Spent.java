@@ -60,8 +60,8 @@ public class Spent extends AppCompatActivity {
         final Lists category = new Lists(this);
         String[] data = category.getCategory();
         // адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinnerstart, R.id.categoryname, data);
+        adapter.setDropDownViewResource(R.layout.spinnerstart);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
