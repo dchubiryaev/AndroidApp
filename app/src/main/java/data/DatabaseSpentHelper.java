@@ -116,6 +116,23 @@ public class DatabaseSpentHelper extends Database {
         return spentList;
     }
 
+    public ArrayList<ListMoney> getThingNotSpent(){
+        ArrayList<ListMoney> list = new  ArrayList();
+        ListMoney listMoney;
+        String selectQuery = "SELECT  * FROM " + TABLE_SPENT + " WHERE " + KEY_FLAG + " IN ('false')";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                listMoney = new ListMoney(cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5));
+                list.add(listMoney);
+            } while (cursor.moveToNext());
+        }
+        return list;
+    }
+
+
     public int getBalance (){
         return  0;
     }
