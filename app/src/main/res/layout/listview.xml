@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="5">
+    android:weightSum="5"
+    android:gravity="center"
+    >
 
     <TextView
         android:id="@+id/category"
@@ -14,6 +17,7 @@
         android:layout_weight="4"
         android:fontFamily="casual"
         android:gravity="left"
+        android:paddingLeft="10dp"
         />
 
     <TextView
@@ -25,6 +29,7 @@
         android:layout_weight="1"
         android:fontFamily="casual"
         android:gravity="right"
+        android:paddingRight="10dp"
          />
 
 </LinearLayout>

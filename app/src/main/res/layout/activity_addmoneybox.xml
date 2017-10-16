@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.calculator.poverty.dog.povertycalculator.money.inmoney.Spent">
+
+    <LinearLayout
+        android:layout_width="395dp"
+        android:layout_height="590dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/setSpentMoneyText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_margin="40dip"
+                android:gravity="center"
+                android:textSize="40dp"
+                android:fontFamily="casual"
+                android:inputType="numberSigned"
+                android:background="@drawable/outline_background"
+                android:ems="10" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:background="@drawable/outline_background"
+                android:padding="10dip"
+                >
+            </Spinner>
+
+            <EditText
+                android:id="@+id/setSpentMoneyCommentText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_margin="40dip"
+                android:layout_marginBottom="0dp"
+                android:gravity="center"
+                android:textSize="40dp"
+                android:fontFamily="casual"
+                android:hint="comment"
+                android:inputType="textPersonName"
+                android:background="@drawable/outline_background"
+                android:ems="10" />
+
+            <Button
+                android:id="@+id/button_calc"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_margin="40dip"
+                android:background="@drawable/outline_background"
+                android:drawableLeft="@drawable/buynow"
+                android:text="Spent"
+                android:textAllCaps="false"
+                android:textSize="40dp"
+                android:fontFamily="casual"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85"
+                app:layout_constraintRight_toRightOf="parent"
+                android:padding="10dip"
+                android:onClick="setSpentMoney"
+                />
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

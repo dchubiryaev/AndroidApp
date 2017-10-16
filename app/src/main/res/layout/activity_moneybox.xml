@@ -4,29 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.calculator.poverty.dog.povertycalculator.money.inmoney.Spent">
+    tools:context="com.calculator.poverty.dog.povertycalculator.money.inmoney.Spent"
+
+    >
 
     <LinearLayout
         android:layout_width="395dp"
         android:layout_height="590dp"
         android:orientation="vertical"
-        android:gravity="center"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
-        android:weightSum="10">
+        android:gravity="center"
+        >
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="395dp"
+            android:layout_width="380dp"
             android:layout_height="390dp"
+            android:listSelector="@color/colorPrimaryDark"
             android:background="@drawable/outline_background"
-             >
+            >
         </ListView>
 
     <LinearLayout
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_weight="1"
         android:layout_height="100dp"
         android:layout_width="350dp"
         android:padding="10dp">
@@ -46,14 +48,13 @@
             app:layout_constraintVertical_bias="0.85"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="10dip"
-            android:onClick="setSpentMoney"
+            android:onClick="addMoneyBox"
             />
 
     </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_weight="1"
             android:layout_height="80dp"
             android:layout_width="350dp">
 
