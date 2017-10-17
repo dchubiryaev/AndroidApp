@@ -55,8 +55,9 @@
 
         <LinearLayout
             android:layout_width="395dp"
-            android:layout_height="40dp"
+            android:layout_height="80dp"
             android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp"
@@ -84,18 +85,38 @@
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="395dp"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:orientation="vertical"
-            android:visibility="visible" >
+            android:visibility="visible"
+            android:gravity="center">
 
-            <com.jjoe64.graphview.GraphView
+            <Button
+                android:id="@+id/button_ordering"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dip"
+                android:textSize="40dp"
+
+                android:textAllCaps="false"
+                android:fontFamily="casual"
+                android:background="@drawable/outline_background"
+                android:drawableLeft="@drawable/order"
+                android:text="Order"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85"
+                app:layout_constraintRight_toRightOf="parent"
+                android:padding="10dip"
+                android:onClick="ButtonOrder" />
+        <!--    <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph"
                 android:layout_width="match_parent"
-                android:layout_height="200dip" />
+                android:layout_height="200dip" /> -->
         </LinearLayout>
         <LinearLayout
             android:layout_width="395dp"
             android:layout_height="40dp"
+            android:layout_marginTop="40dp"
             android:orientation="horizontal"
             android:visibility="visible"
             android:gravity="center">
@@ -123,6 +144,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
             android:orientation="vertical"
             android:gravity="center">
 

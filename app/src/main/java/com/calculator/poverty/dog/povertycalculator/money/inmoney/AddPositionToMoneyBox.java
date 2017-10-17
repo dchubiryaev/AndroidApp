@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
+import com.calculator.poverty.dog.povertycalculator.money.Money;
 
 import data.Calculation;
 import data.Lists;
@@ -32,6 +33,14 @@ public class AddPositionToMoneyBox extends AppCompatActivity {
         setContentView(R.layout.activity_addpositiontomoneybox);
         setSpinner();
     }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        Intent intent = new Intent(this, MoneyBox.class);
+        startActivity(intent);
+    }
+
     //Button addlist
     public void addNewMoneyBox (View view) {
         TextView getComment = (TextView) findViewById(R.id.setSpentMoneyCommentText);

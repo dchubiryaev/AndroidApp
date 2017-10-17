@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
+import com.calculator.poverty.dog.povertycalculator.money.Money;
 
 import java.util.ArrayList;
 
@@ -58,6 +59,13 @@ public class MoneyBox extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        Intent intent = new Intent(this, Money.class);
+        startActivity(intent);
     }
 
     public void setListView () {

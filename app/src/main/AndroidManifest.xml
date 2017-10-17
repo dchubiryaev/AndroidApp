@@ -24,6 +24,7 @@
             />
         <activity android:name=".money.inmoney.Settings" />
         <activity android:name=".money.inmoney.AddPositionToMoneyBox" />
+        <activity android:name=".money.inmoney.Order" />
 
         <activity
             android:name=".tasks.Tasks"

@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
+import com.calculator.poverty.dog.povertycalculator.StartPage;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
 
@@ -34,6 +35,13 @@ public class Spent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spent);
         setSpinner();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        Intent intent = new Intent(this, Money.class);
+        startActivity(intent);
     }
 
 
