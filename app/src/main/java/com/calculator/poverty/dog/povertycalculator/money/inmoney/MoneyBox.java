@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
@@ -21,9 +22,11 @@ import data.DatabaseSpentHelper;
  */
 
 public class MoneyBox extends AppCompatActivity {
-    Context context;
-    ArrayList<ListMoney> arr;
+
+    ArrayList<ListMoney> data;
+    String money;
     ListView lv;
+    ListMoney listMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +37,11 @@ public class MoneyBox extends AppCompatActivity {
         setListView();
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-                System.out.println("itemClick: position = " + position + ", id = " + id);
-
+                listMoney = data.get(position);
+                System.out.println(listMoney.getThing());
             }
         });
 
@@ -56,23 +60,32 @@ public class MoneyBox extends AppCompatActivity {
 
     }
 
-    public void onItemClick (AdapterView<?> parent, View view, int position, long id){
-        System.out.println("bla bla bla");
-    }
-
     public void setListView () {
         final DatabaseSpentHelper thing = new DatabaseSpentHelper(this);
-        ArrayList<ListMoney> data = thing.getThingNotSpent();
-        arr = new ArrayList<>();
+        data = thing.getThingNotSpent();
         lv = (ListView) this.findViewById(R.id.listView);
         lv.setAdapter(new MoneyBoxAdapter(this,data));
 
     }
 
-    public void addMoneyBox(View view){
-        Intent intent = new Intent ( MoneyBox.this , AddMoneyBox.class );
+    public void addPositionToMoneyBox(View view){
+        Intent intent = new Intent ( MoneyBox.this , AddPositionToMoneyBox.class );
         startActivity(intent);
     }
+
+    public void addMoney(View view){
+        final DatabaseSpentHelper thing = new DatabaseSpentHelper(this);
+        TextView getMoney = (TextView) findViewById(R.id.setMoneyText);
+
+        int beforeMoney = Integer.parseInt(listMoney.getMoney());
+        int addMoney = Integer.parseInt(getMoney.getText().toString());
+        int sum = beforeMoney+addMoney;
+        listMoney.setMoney(""+sum);
+        thing.addMoneyToBox(listMoney);
+        getMoney.setText("");
+        recreate();
+    }
+
 
 
 }

@@ -50,6 +50,20 @@ public class DatabaseSpentHelper extends Database {
         db.close();
     }
 
+    public void addMoneyToBox(ListMoney listMoney) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues barsikValues = new ContentValues();
+// Помещаем значение "Clever" в колонку DESCRIPTION
+        barsikValues.put(KEY_MONEY, listMoney.getMoney());
+// Обновляем колонку DESCRIPTION с новым значением "Clever"
+// в таблице WHERE NAME = "Barsik"
+        db.update(TABLE_SPENT,
+                barsikValues,
+                "thing = ?",
+                new String[] {listMoney.getThing() });
+        db.close();
+    }
+
     public int getSpentAllMoney(){
         int balance = 0;
         String selectQuery = "SELECT  * FROM " + TABLE_SPENT;

@@ -48,7 +48,7 @@
             app:layout_constraintVertical_bias="0.85"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="10dip"
-            android:onClick="addMoneyBox"
+            android:onClick="addPositionToMoneyBox"
             />
 
     </LinearLayout>
@@ -59,7 +59,7 @@
             android:layout_width="350dp">
 
             <EditText
-                android:id="@+id/setSpentMoneyText"
+                android:id="@+id/setMoneyText"
                 android:layout_width="200dp"
                 android:layout_height="80dp"
                 android:layout_margin="10dip"
@@ -68,7 +68,7 @@
                 android:fontFamily="casual"
                 android:inputType="numberSigned"
                 android:background="@drawable/outline_background"
-                android:ems="10" />
+                />
 
             <Button
                 android:id="@+id/button_calc"
@@ -85,7 +85,7 @@
                 app:layout_constraintVertical_bias="0.85"
                 app:layout_constraintRight_toRightOf="parent"
                 android:padding="10dip"
-                android:onClick="setSpentMoney"
+                android:onClick="addMoney"
                 />
 
         </LinearLayout>

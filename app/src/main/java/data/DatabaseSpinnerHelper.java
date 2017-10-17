@@ -31,9 +31,13 @@ public class DatabaseSpinnerHelper extends Database  {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
-            do {
-                category.add(cursor.getString(1));
-            } while (cursor.moveToNext());
+             do {
+                 if (cursor.getString(1).equals("Money Box")) {
+                     cursor.moveToNext();
+                 }
+                 category.add(cursor.getString(1));
+             } while (cursor.moveToNext());
+
         }
         int count = category.size();
         String[] arr = new String[count];

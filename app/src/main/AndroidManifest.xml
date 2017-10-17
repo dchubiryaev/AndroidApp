@@ -19,9 +19,11 @@
         <activity android:name=".money.Money" />
         <activity android:name=".money.inmoney.Spent" />
         <activity android:name=".money.inmoney.GotMoney" />
-        <activity android:name=".money.inmoney.MoneyBox" />
+        <activity android:name=".money.inmoney.MoneyBox"
+            android:windowSoftInputMode="stateHidden"
+            />
         <activity android:name=".money.inmoney.Settings" />
-        <activity android:name=".money.inmoney.AddMoneyBox" />
+        <activity android:name=".money.inmoney.AddPositionToMoneyBox" />
 
         <activity
             android:name=".tasks.Tasks"
@@ -29,5 +31,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="res.la.MainActivity"></activity>
     </application>
+
 
 </manifest>
