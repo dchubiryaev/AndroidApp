@@ -1,5 +1,7 @@
 package com.calculator.poverty.dog.povertycalculator.money.inmoney;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.StartPage;
 import com.calculator.poverty.dog.povertycalculator.money.ListGotMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
+import com.calculator.poverty.dog.povertycalculator.money.checkCorrect;
 
 import java.util.Date;
 
@@ -48,13 +51,34 @@ public class GotMoney extends AppCompatActivity {
 
     public void setGotMoney(View view) {
         TextView getMoney = (TextView) findViewById(R.id.setGotMoneyText);
-        money = getMoney.getText().toString();
-        date = new Date();
-        ListGotMoney listGotMoney = new ListGotMoney(choseCategory, date.toString(), money);
-        Calculation calculation = new Calculation(this);
-        calculation.addGot(listGotMoney);
-        Intent intent = new Intent(GotMoney.this, Money.class);
-        startActivity(intent);
+        checkCorrect check = new checkCorrect();
+        if (check.checkNumber(getMoney.getText().toString())){
+            money = getMoney.getText().toString();
+            date = new Date();
+            ListGotMoney listGotMoney = new ListGotMoney(choseCategory, date.toString(), money);
+            Calculation calculation = new Calculation(this);
+            calculation.addGot(listGotMoney);
+            Intent intent = new Intent(GotMoney.this, Money.class);
+            startActivity(intent);
+        }
+        else {
+            openQuitDialog();
+        }
+
+    }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle("Enter correct numbers!");
+
+        quitDialog.setNegativeButton("Ok!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
     }
 
     public void setSpinner(){

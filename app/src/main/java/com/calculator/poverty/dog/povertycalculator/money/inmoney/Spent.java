@@ -1,5 +1,7 @@
 package com.calculator.poverty.dog.povertycalculator.money.inmoney;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.StartPage;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
+import com.calculator.poverty.dog.povertycalculator.money.checkCorrect;
 
 import java.util.Date;
 
@@ -50,13 +53,27 @@ public class Spent extends AppCompatActivity {
         money = getMoney.getText().toString();
         TextView getComment = (TextView) findViewById(R.id.setSpentMoneyCommentText);
         comment = getComment.getText().toString();
-        date = new Date();
-        ListMoney listMoney = new ListMoney(choseCategory, comment, date.toString(), money, "true");
-        Calculation calculation = new Calculation(this);
 
-        calculation.addSpent(listMoney);
-        Intent intent = new Intent(Spent.this, Money.class);
-        startActivity(intent);
+        checkCorrect check = new checkCorrect();
+        if (check.checkNumber(getMoney.getText().toString())){
+            money = getMoney.getText().toString();
+            if (!check.checkComment(comment)){
+                openQuitDialogComment();
+            } else {
+                date = new Date();
+                ListMoney listMoney = new ListMoney(choseCategory, comment, date.toString(), money, "true");
+                Calculation calculation = new Calculation(this);
+
+                calculation.addSpent(listMoney);
+                Intent intent = new Intent(Spent.this, Money.class);
+                startActivity(intent);
+            }
+        }
+        else {
+            openQuitDialog();
+        }
+
+
     }
 
     public void setSpinner(){
@@ -81,6 +98,34 @@ public class Spent extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
+    }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle("Enter correct numbers!");
+
+        quitDialog.setNegativeButton("Ok!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
+    }
+
+    private void openQuitDialogComment() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle("Comment can not be zero!");
+
+        quitDialog.setNegativeButton("Ok!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
     }
 
 }

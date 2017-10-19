@@ -1,5 +1,7 @@
 package com.calculator.poverty.dog.povertycalculator.money.inmoney;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
+import com.calculator.poverty.dog.povertycalculator.money.checkCorrect;
 
 import data.Calculation;
 import data.Lists;
@@ -44,12 +47,19 @@ public class AddPositionToMoneyBox extends AppCompatActivity {
     //Button addlist
     public void addNewMoneyBox (View view) {
         TextView getComment = (TextView) findViewById(R.id.setSpentMoneyCommentText);
-        comment = getComment.getText().toString();
-        ListMoney listMoney = new ListMoney(choseCategory, comment, date, money, "false");
-        Calculation calculation = new Calculation(this);
-        calculation.addSpent(listMoney);
-        Intent intent = new Intent(AddPositionToMoneyBox.this, MoneyBox.class);
-        startActivity(intent);
+        checkCorrect check = new checkCorrect();
+
+        if (check.checkComment(getComment.getText().toString())){
+            comment = getComment.getText().toString();
+            ListMoney listMoney = new ListMoney(choseCategory, comment, date, money, "false");
+            Calculation calculation = new Calculation(this);
+            calculation.addSpent(listMoney);
+            Intent intent = new Intent(AddPositionToMoneyBox.this, MoneyBox.class);
+            startActivity(intent);
+        }
+        else {
+            openQuitDialog();
+        }
     }
 
     public void setSpinner(){
@@ -75,5 +85,19 @@ public class AddPositionToMoneyBox extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
+    }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle("Comment can not be zero!");
+
+        quitDialog.setNegativeButton("Ok!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
     }
 }

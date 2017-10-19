@@ -1,6 +1,8 @@
 package com.calculator.poverty.dog.povertycalculator.money.inmoney;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +13,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
+import com.calculator.poverty.dog.povertycalculator.money.ListGotMoney;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
+import com.calculator.poverty.dog.povertycalculator.money.checkCorrect;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+import data.Calculation;
 import data.DatabaseSpentHelper;
 
 /**
@@ -42,7 +48,6 @@ public class MoneyBox extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
                 listMoney = data.get(position);
-                System.out.println(listMoney.getThing());
             }
         });
 
@@ -84,14 +89,54 @@ public class MoneyBox extends AppCompatActivity {
     public void addMoney(View view){
         final DatabaseSpentHelper thing = new DatabaseSpentHelper(this);
         TextView getMoney = (TextView) findViewById(R.id.setMoneyText);
+        checkCorrect check = new checkCorrect();
 
-        int beforeMoney = Integer.parseInt(listMoney.getMoney());
-        int addMoney = Integer.parseInt(getMoney.getText().toString());
-        int sum = beforeMoney+addMoney;
-        listMoney.setMoney(""+sum);
-        thing.addMoneyToBox(listMoney);
-        getMoney.setText("");
-        recreate();
+        if (check.checkNumber(getMoney.getText().toString())){
+            if (check.checkItem(listMoney)){
+                int beforeMoney = Integer.parseInt(listMoney.getMoney());
+                int addMoney = Integer.parseInt(getMoney.getText().toString());
+                int sum = beforeMoney+addMoney;
+                listMoney.setMoney(""+sum);
+                thing.addMoneyToBox(listMoney);
+                getMoney.setText("");
+                recreate();
+            } else {
+                openQuitDialogItem();
+            }
+        }
+        else {
+            openQuitDialog();
+        }
+
+
+    }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle("Enter correct numbers!");
+
+        quitDialog.setNegativeButton("Ok!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
+    }
+
+    private void openQuitDialogItem() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle("Checking Item!");
+
+        quitDialog.setNegativeButton("Ok!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
     }
 
 

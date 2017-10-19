@@ -21,7 +21,7 @@
 
     <Button
         android:id="@+id/button_tasks"
-        android:layout_width="170dp"
+        android:layout_width="140dp"
         android:layout_height="80dp"
         android:background="@drawable/outline_background"
         android:drawableLeft="@drawable/tasks"
@@ -31,12 +31,12 @@
         app:layout_constraintVertical_bias="0.85"
         app:layout_constraintRight_toRightOf="parent"
         android:padding="10dip"
-        android:layout_marginEnd="220dp"
+        android:layout_marginEnd="200dp"
         android:onClick="ButtonClickTasks" />
 
     <Button
         android:id="@+id/button_calc"
-        android:layout_width="170dp"
+        android:layout_width="140dp"
         android:layout_height="80dp"
         android:background="@drawable/outline_background"
         android:drawableLeft="@drawable/money"
