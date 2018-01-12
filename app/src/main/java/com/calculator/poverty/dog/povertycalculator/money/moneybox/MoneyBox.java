@@ -3,8 +3,10 @@ package com.calculator.poverty.dog.povertycalculator.money.moneybox;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -19,6 +21,7 @@ import com.calculator.poverty.dog.povertycalculator.money.Money;
 import java.util.ArrayList;
 
 import data.DatabaseSpentHelper;
+import data.UseDatabase;
 
 /**
  * Created by DoG on 15.10.2017.
@@ -30,6 +33,7 @@ public class MoneyBox extends AppCompatActivity {
     String money;
     ListView lv;
     ListMoney listMoney;
+    private UseDatabase useDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class MoneyBox extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moneybox);
         setListView();
+        useDatabase = new UseDatabase(this);
+        setTaxtBalance();
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -139,6 +145,18 @@ public class MoneyBox extends AppCompatActivity {
         quitDialog.show();
     }
 
+    private void setTaxtBalance(){
+        int balance = useDatabase.getBalance();
+
+        TextView textBal = (TextView)findViewById(R.id.textBalance); // Инициализируем компонент
+        textBal.setText("Really Balance:");// задаём текст
+        textBal.setTextColor(Color.rgb(0,0,0));//black color
+        textBal.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
+        TextView textBalance = (TextView)findViewById(R.id.textMoneyBalance); // Инициализируем компонент
+        textBalance.setText("" + balance);// задаём текст
+        textBalance.setTextColor(Color.rgb(0,0,0));//black color
+        textBalance.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
+    }
 
 
 }

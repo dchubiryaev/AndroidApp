@@ -17,15 +17,14 @@
         <LinearLayout
             android:layout_width="345dp"
             android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
-            >
+            android:visibility="visible"
+            android:gravity="center">
 
             <TextView
-                android:id="@+id/textBal"
+                android:id="@+id/textBalance"
                 android:gravity="left"
                 android:layout_gravity="left"
                 android:layout_width="250dp"
@@ -34,7 +33,7 @@
                 android:fontFamily="casual"
                 />
             <TextView
-                android:id="@+id/textBalance"
+                android:id="@+id/textMoneyBalance"
                 android:layout_gravity="right"
                 android:gravity="right"
                 android:layout_width="wrap_content"
@@ -73,34 +72,6 @@
                 android:id="@+id/graph"
                 android:layout_width="match_parent"
                 android:layout_height="200dip" /> -->
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="345dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/textRealBal"
-                android:gravity="left"
-                android:layout_gravity="left"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:text="Balance"
-                android:fontFamily="casual"
-                />
-            <TextView
-                android:id="@+id/textRealBalance"
-                android:layout_gravity="right"
-                android:gravity="right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Balance"
-                android:fontFamily="casual"
-                />
         </LinearLayout>
 
         <LinearLayout

@@ -27,7 +27,7 @@ public class Money extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_money);
         useDatabase = new UseDatabase(this);
-        setText();
+        setTaxtBalance();
 //        setGraph();
     }
 
@@ -77,25 +77,17 @@ public class Money extends AppCompatActivity {
 //        graph.addSeries(series);
 //    }
 
-    private void setText(){
+    private void setTaxtBalance(){
         int balance = useDatabase.getBalance();
         int segmentBalance = balance - useDatabase.getSumMoneyInMoneyBox();
-        TextView textBal = (TextView)findViewById(R.id.textBal); // Инициализируем компонент
+
+        TextView textBal = (TextView)findViewById(R.id.textBalance); // Инициализируем компонент
         textBal.setText("Your Balance:");// задаём текст
         textBal.setTextColor(Color.rgb(0,0,0));//black color
         textBal.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
-        TextView textBalance = (TextView)findViewById(R.id.textBalance); // Инициализируем компонент
-        textBalance.setText("" + balance);// задаём текст
+        TextView textBalance = (TextView)findViewById(R.id.textMoneyBalance); // Инициализируем компонент
+        textBalance.setText("" + segmentBalance);// задаём текст
         textBalance.setTextColor(Color.rgb(0,0,0));//black color
         textBalance.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
-
-        TextView textRealBal = (TextView)findViewById(R.id.textRealBal); // Инициализируем компонент
-        textRealBal.setText("Money for flag:");// задаём текст
-        textRealBal.setTextColor(Color.rgb(0,0,0));//black color
-        textRealBal.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
-        TextView textRealBalance = (TextView)findViewById(R.id.textRealBalance); // Инициализируем компонент
-        textRealBalance.setText(""+ segmentBalance);// задаём текст
-        textRealBalance.setTextColor(Color.rgb(0,0,0));//black color
-        textRealBalance.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
     }
 }

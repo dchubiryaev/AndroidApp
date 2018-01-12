@@ -16,6 +16,7 @@ import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.money.CheckingCorrect;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
+import com.calculator.poverty.dog.povertycalculator.money.spent.Spent;
 
 import java.util.Date;
 
@@ -111,6 +112,8 @@ public class SpentFromMoneyBox extends AppCompatActivity {
         } else {
             useDatabase.updateListInMoneyBox(ListInMoneyBox);
         }
+        Intent intent = new Intent(this, Money.class);
+        startActivity(intent);
     }
 
     private void setData() {
