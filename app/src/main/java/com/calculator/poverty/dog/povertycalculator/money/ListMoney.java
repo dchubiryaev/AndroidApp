@@ -1,7 +1,5 @@
 package com.calculator.poverty.dog.povertycalculator.money;
 
-import java.util.Date;
-
 /**
  * Created by DoG on 14.10.2017.
  */
@@ -9,29 +7,29 @@ import java.util.Date;
 public class ListMoney {
     int _id;
     String category;
-    String thing;
+    String comment;
     String date;
     String money;
-    String spent;
+    String flag;
 
     public ListMoney(){
     }
 
-    public ListMoney(int id, String category, String thing, String date, String money, String spent) {
+    public ListMoney(int id, String category, String comment, String date, String money, String flag) {
         this._id = id;
         this.category = category;
-        this.thing = thing;
+        this.comment = comment;
         this.date = date;
         this.money = money;
-        this.spent = spent;
+        this.flag = flag;
     }
 
-    public ListMoney(String category, String thing, String date, String money, String spent) {
+    public ListMoney(String category, String comment, String date, String money, String flag) {
         this.category = category;
-        this.thing = thing;
+        this.comment = comment;
         this.date = date;
         this.money = money;
-        this.spent = spent;
+        this.flag = flag;
     }
 
     public int getID(){
@@ -46,12 +44,12 @@ public class ListMoney {
 
     public void setCategory(String cat) {this.category = cat;}
 
-    public String getThing(){
-        return thing;
+    public String getComment(){
+        return comment;
     }
 
-    public void setThing (String thing) {
-        this.thing = thing;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getDate(){
@@ -66,10 +64,10 @@ public class ListMoney {
 
     public void setMoney(String money){ this.money = money; }
 
-    public String getSpent() {return spent; }
+    public String getFlag() {return flag; }
 
-    public void setSpent (String spent) {
-        this.spent = spent;
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 
 

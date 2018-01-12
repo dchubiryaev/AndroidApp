@@ -1,4 +1,4 @@
-package com.calculator.poverty.dog.povertycalculator.money.inmoney;
+package com.calculator.poverty.dog.povertycalculator.money.settings;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

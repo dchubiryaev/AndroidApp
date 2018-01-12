@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".money.gotmoney.GotMoney">
+    tools:context=".money.spent.Spent">
+
     <LinearLayout
         android:layout_width="345dp"
-        android:layout_height="470dp"
+        android:layout_height="590dp"
         android:orientation="vertical"
         android:gravity="center"
         tools:layout_editor_absoluteX="8dp"
@@ -17,69 +18,70 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingTop="20dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <EditText
-                android:id="@+id/setGotMoneyText"
+                android:id="@+id/setSpentMoneyText"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_margin="40dip"
-
-                android:gravity="center"
-                android:textSize="40dp"
-                android:fontFamily="casual"
-                android:inputType="numberSigned"
+                android:layout_margin="10dip"
                 android:background="@drawable/outline_background"
-                android:ems="10" />
+                android:ems="10"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:inputType="numberSigned"
+                android:textSize="40dp" />
+
+            <EditText
+                android:id="@+id/setSpentMoneyCommentText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dip"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/outline_background"
+                android:ems="10"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:hint="comment"
+                android:inputType="textPersonName"
+                android:textSize="40dp" />
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/outline_background"
-                android:padding="0dip"
-                >
-            </Spinner>
+                android:padding="10dip"></Spinner>
 
-            <TextView
-
+            <CheckBox
+                android:id="@+id/checkBox"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:layout_margin="20dip"
-                android:layout_marginBottom="0dp"
-                android:gravity="center"
-                android:textSize="40dp"
-                android:fontFamily="casual"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Delete from money box" />
 
-                android:inputType="textPersonName"
-
-                android:ems="10" />
 
             <Button
                 android:id="@+id/button_calc"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:layout_margin="40dip"
+                android:layout_margin="80dip"
                 android:background="@drawable/outline_background"
-                android:drawableLeft="@drawable/gotmoneytwo"
-                android:text="Got !"
+                android:drawableLeft="@drawable/buynow"
+                android:fontFamily="casual"
+                android:onClick="spentButton"
+                android:padding="10dip"
+                android:text="Spent"
                 android:textAllCaps="false"
                 android:textSize="40dp"
-                android:fontFamily="casual"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.85"
                 app:layout_constraintRight_toRightOf="parent"
-                android:padding="10dip"
-                android:onClick="setGotMoney"
-                />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85" />
 
         </LinearLayout>
-
-
-
 
 
     </LinearLayout>

@@ -5,26 +5,18 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import static data.Database.DB_PATH;
 
 public class DatabaseSpentHelper extends Database {
 
     private static final String TABLE_SPENT = "spent";
     private static final String KEY_ID = "_id";
     private static final String KEY_CATEGORY = "category";
-    private static final String KEY_THING = "thing";
+    private static final String KEY_COMMENT = "thing";
     private static final String KEY_DATE = "date";
     private static final String KEY_MONEY = "money";
     private static final String KEY_FLAG = "flag";
@@ -38,33 +30,58 @@ public class DatabaseSpentHelper extends Database {
         return mDataBase != null;
     }
 
-    public void addSpent(ListMoney listMoney) {
+    public void addSpentMoneyToDB(ListMoney listMoney) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_CATEGORY, listMoney.getCategory());
-        values.put(KEY_THING, listMoney.getThing());
+        values.put(KEY_COMMENT, listMoney.getComment());
         values.put(KEY_DATE, listMoney.getDate());
         values.put(KEY_MONEY, listMoney.getMoney());
-        values.put(KEY_FLAG, listMoney.getSpent());
+        values.put(KEY_FLAG, listMoney.getFlag());
         db.insert(TABLE_SPENT, null, values);
         db.close();
     }
 
-    public void addMoneyToBox(ListMoney listMoney) {
+    public void updateListInMoneyBoxToDB(ListMoney listMoney) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues barsikValues = new ContentValues();
-// Помещаем значение "Clever" в колонку DESCRIPTION
-        barsikValues.put(KEY_MONEY, listMoney.getMoney());
-// Обновляем колонку DESCRIPTION с новым значением "Clever"
-// в таблице WHERE NAME = "Barsik"
-        db.update(TABLE_SPENT,
-                barsikValues,
-                "thing = ?",
-                new String[] {listMoney.getThing() });
+        ContentValues value = new ContentValues();
+        value.put(KEY_MONEY, listMoney.getMoney());
+        // update: TABLE_NAME, VALUES, WHERE(thing] =, listMoney,getComment
+        db.update(TABLE_SPENT, value, "flag = ? AND thing = ?", new String[] {"false", listMoney.getComment()});
         db.close();
     }
 
-    public int getSpentAllMoney(){
+    public void deleteListFromMoneyBox(ListMoney listMoney){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_SPENT, "flag = ? AND thing = ?", new String[] {"false", listMoney.getComment()});
+        db.close();
+    }
+
+    //ПРОВЕРКА ПО THING ЕСЛИ БУДЕТ ДВА ОДИНАКОВЫх ПАРАМЕТРА БУДЕТ РАБОТАТЬ хУЙ ЗНАЕТ КАК!!!!
+    public void setFlagTrueForThingInDB(ListMoney listMoney) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues value = new ContentValues();
+        value.put(KEY_FLAG, "true");
+        db.update(TABLE_SPENT, value, "flag = ? AND thing = ?", new String[] {"false", listMoney.getComment()});
+        db.delete(TABLE_SPENT, "flag = ? AND thing = ?", new String[] {"false", listMoney.getComment()});
+        db.close();
+    }
+
+    public int getSumBalanceInMoneyBox(){
+        int balance = 0;
+        String selectQuery = "SELECT  * FROM " + TABLE_SPENT + " WHERE " + KEY_FLAG + " IN ('false')";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                balance += Integer.parseInt(cursor.getString(4));
+            } while (cursor.moveToNext());
+        }
+        return balance;
+    }
+
+    public int getSumAllMoney(){
         int balance = 0;
         String selectQuery = "SELECT  * FROM " + TABLE_SPENT;
 
@@ -78,7 +95,7 @@ public class DatabaseSpentHelper extends Database {
         return balance;
     }
 
-    public int getSpentNotAllMoney(){
+    public int getSumMoneyWhereFlagIsTrue(){
         int balance = 0;
         String selectQuery = "SELECT  * FROM " + TABLE_SPENT + " WHERE " + KEY_FLAG + " IN ('true')";
 
@@ -96,7 +113,7 @@ public class DatabaseSpentHelper extends Database {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_SPENT, new String[] { KEY_ID,
-                        KEY_CATEGORY, KEY_THING, KEY_DATE, KEY_MONEY, KEY_FLAG}, KEY_ID + "=?",
+                        KEY_CATEGORY, KEY_COMMENT, KEY_DATE, KEY_MONEY, KEY_FLAG}, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
 
         if (cursor != null){
@@ -120,10 +137,10 @@ public class DatabaseSpentHelper extends Database {
                 ListMoney listMoney = new ListMoney();
                 listMoney.setID(Integer.parseInt(cursor.getString(0)));
                 listMoney.setCategory(cursor.getString(1));
-                listMoney.setThing(cursor.getString(2));
+                listMoney.setComment(cursor.getString(2));
                 listMoney.setDate(cursor.getString(3));
                 listMoney.setMoney(cursor.getString(4));
-                listMoney.setSpent(cursor.getString(5));
+                listMoney.setFlag(cursor.getString(5));
                 spentList.add(listMoney);
             } while (cursor.moveToNext());
         }

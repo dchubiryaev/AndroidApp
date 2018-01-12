@@ -1,4 +1,4 @@
-package com.calculator.poverty.dog.povertycalculator.money.inmoney;
+package com.calculator.poverty.dog.povertycalculator.money.moneybox;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -60,7 +60,7 @@ public class MoneyBoxAdapter extends BaseAdapter {
 
         //Устанавливаем в каждую текствьюшку соответствующий текст
         // сначала заголовок
-        category.setText(data.get(i).getThing());
+        category.setText(data.get(i).getComment());
         // потом подзаголовок
         money.setText(data.get(i).getMoney());
         return someView;

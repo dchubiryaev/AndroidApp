@@ -1,7 +1,6 @@
-package com.calculator.poverty.dog.povertycalculator.money.inmoney;
+package com.calculator.poverty.dog.povertycalculator.money.moneybox;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +12,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
-import com.calculator.poverty.dog.povertycalculator.money.ListGotMoney;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
-import com.calculator.poverty.dog.povertycalculator.money.checkCorrect;
+import com.calculator.poverty.dog.povertycalculator.money.CheckCorrect;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import data.Calculation;
 import data.DatabaseSpentHelper;
 
 /**
@@ -56,7 +52,11 @@ public class MoneyBox extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
-                Intent intent=new Intent ( MoneyBox.this , Spent.class );
+                Intent intent=new Intent ( MoneyBox.this , SpentFromMoneyBox.class );
+                listMoney = data.get(position);
+                intent.putExtra("comment", listMoney.getComment());
+                intent.putExtra("money", listMoney.getMoney());
+                intent.putExtra("category", listMoney.getCategory());
                 startActivity(intent);
                 // Возвращает "истину", чтобы завершить событие клика, чтобы
                 // onListItemClick больше не вызывался
@@ -89,15 +89,15 @@ public class MoneyBox extends AppCompatActivity {
     public void addMoney(View view){
         final DatabaseSpentHelper thing = new DatabaseSpentHelper(this);
         TextView getMoney = (TextView) findViewById(R.id.setMoneyText);
-        checkCorrect check = new checkCorrect();
+        CheckCorrect check = new CheckCorrect();
 
         if (check.checkNumber(getMoney.getText().toString())){
             if (check.checkItem(listMoney)){
                 int beforeMoney = Integer.parseInt(listMoney.getMoney());
                 int addMoney = Integer.parseInt(getMoney.getText().toString());
-                int sum = beforeMoney+addMoney;
+                int sum = beforeMoney + addMoney;
                 listMoney.setMoney(""+sum);
-                thing.addMoneyToBox(listMoney);
+                thing.updateListInMoneyBoxToDB(listMoney);
                 getMoney.setText("");
                 recreate();
             } else {

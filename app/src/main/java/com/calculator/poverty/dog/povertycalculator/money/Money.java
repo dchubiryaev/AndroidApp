@@ -1,8 +1,6 @@
 package com.calculator.poverty.dog.povertycalculator.money;
 
 ;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -12,32 +10,23 @@ import android.view.View;
 import android.widget.TextView;
 import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.StartPage;
-import com.calculator.poverty.dog.povertycalculator.money.inmoney.GotMoney;
-import com.calculator.poverty.dog.povertycalculator.money.inmoney.MoneyBox;
-import com.calculator.poverty.dog.povertycalculator.money.inmoney.Order;
-import com.calculator.poverty.dog.povertycalculator.money.inmoney.Settings;
-import com.calculator.poverty.dog.povertycalculator.money.inmoney.Spent;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
+import com.calculator.poverty.dog.povertycalculator.money.gotmoney.GotMoney;
+import com.calculator.poverty.dog.povertycalculator.money.moneybox.MoneyBox;
+import com.calculator.poverty.dog.povertycalculator.money.settings.Settings;
+import com.calculator.poverty.dog.povertycalculator.money.spent.Spent;
 
-import java.lang.reflect.Array;
-import java.util.Calendar;
-import java.util.Date;
-
-import data.Calculation;
+import data.UseDatabase;
 
 
 public class Money extends AppCompatActivity {
 
-    private Calculation calculation;
+    private UseDatabase useDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_money);
-        calculation = new Calculation(this);
+        useDatabase = new UseDatabase(this);
         setText();
 //        setGraph();
     }
@@ -47,29 +36,6 @@ public class Money extends AppCompatActivity {
         // super.onBackPressed();
         Intent intent = new Intent(this, StartPage.class);
         startActivity(intent);
-    }
-
-    private void openQuitDialog() {
-        AlertDialog.Builder quitDialog = new AlertDialog.Builder(
-                this);
-        quitDialog.setTitle("Выход: Вы уверены?");
-
-        quitDialog.setPositiveButton("Таки да!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-                finish();
-            }
-        });
-
-        quitDialog.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-            }
-        });
-
-        quitDialog.show();
     }
 
     public void ButtonSpent(View view){
@@ -112,21 +78,23 @@ public class Money extends AppCompatActivity {
 //    }
 
     private void setText(){
+        int balance = useDatabase.getBalance();
+        int segmentBalance = balance - useDatabase.getSumMoneyInMoneyBox();
         TextView textBal = (TextView)findViewById(R.id.textBal); // Инициализируем компонент
         textBal.setText("Your Balance:");// задаём текст
         textBal.setTextColor(Color.rgb(0,0,0));//black color
         textBal.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
         TextView textBalance = (TextView)findViewById(R.id.textBalance); // Инициализируем компонент
-        textBalance.setText("" + calculation.getBalance());// задаём текст
+        textBalance.setText("" + balance);// задаём текст
         textBalance.setTextColor(Color.rgb(0,0,0));//black color
         textBalance.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
 
         TextView textRealBal = (TextView)findViewById(R.id.textRealBal); // Инициализируем компонент
-        textRealBal.setText("Money for spent:");// задаём текст
+        textRealBal.setText("Money for flag:");// задаём текст
         textRealBal.setTextColor(Color.rgb(0,0,0));//black color
         textRealBal.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
         TextView textRealBalance = (TextView)findViewById(R.id.textRealBalance); // Инициализируем компонент
-        textRealBalance.setText(""+calculation.getBalanceForSpenting());// задаём текст
+        textRealBalance.setText(""+ segmentBalance);// задаём текст
         textRealBalance.setTextColor(Color.rgb(0,0,0));//black color
         textRealBalance.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
     }

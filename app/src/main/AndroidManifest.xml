@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -17,14 +17,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".money.Money" />
-        <activity android:name=".money.inmoney.Spent" />
-        <activity android:name=".money.inmoney.GotMoney" />
-        <activity android:name=".money.inmoney.MoneyBox"
+        <activity android:name=".money.spent.Spent" />
+        <activity android:name=".money.gotmoney.GotMoney" />
+        <activity android:name=".money.moneybox.MoneyBox"
             android:windowSoftInputMode="stateHidden"
             />
-        <activity android:name=".money.inmoney.Settings" />
-        <activity android:name=".money.inmoney.AddPositionToMoneyBox" />
-        <activity android:name=".money.inmoney.Order" />
+        <activity android:name=".money.settings.Settings" />
+        <activity android:name=".money.moneybox.AddPositionToMoneyBox" />
+        <activity android:name=".money.moneybox.SpentFromMoneyBox" />
+        <activity android:name=".money.order.Order" />
+
 
         <activity
             android:name=".tasks.Tasks"

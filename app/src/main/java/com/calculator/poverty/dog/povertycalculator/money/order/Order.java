@@ -1,11 +1,11 @@
-package com.calculator.poverty.dog.povertycalculator.money.inmoney;
+package com.calculator.poverty.dog.povertycalculator.money.order;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.calculator.poverty.dog.povertycalculator.R;
 
-import data.Calculation;
+import data.UseDatabase;
 
 /**
  * Created by DoG on 17.10.2017.
@@ -13,13 +13,13 @@ import data.Calculation;
 
 public class Order extends AppCompatActivity {
 
-    private Calculation calculation;
+    private UseDatabase useDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_money);
-        calculation = new Calculation(this);
+        useDatabase = new UseDatabase(this);
 
     }
 }

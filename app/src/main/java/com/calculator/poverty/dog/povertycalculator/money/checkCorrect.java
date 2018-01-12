@@ -4,13 +4,12 @@ package com.calculator.poverty.dog.povertycalculator.money;
  * Created by DoG on 17.10.2017.
  */
 
-public class checkCorrect {
+public class CheckCorrect {
 
-    public checkCorrect (){
+    public CheckCorrect(){
     }
 
-
-    //Need check on zero. Zero there is true!!!
+    //Need checkCorrectData on zero. Zero there is true!!!
     public boolean checkNumber (String num){
         int number;
         try{
@@ -36,7 +35,7 @@ public class checkCorrect {
 
     public boolean checkItem(ListMoney listMoney) {
         try{
-            String thing = listMoney.getThing();
+            String thing = listMoney.getComment();
         } catch (Exception ex) {
             return false;
         } return true;

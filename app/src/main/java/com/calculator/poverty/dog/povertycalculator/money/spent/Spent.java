@@ -1,4 +1,4 @@
-package com.calculator.poverty.dog.povertycalculator.money.inmoney;
+package com.calculator.poverty.dog.povertycalculator.money.spent;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,14 +12,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
-import com.calculator.poverty.dog.povertycalculator.StartPage;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
-import com.calculator.poverty.dog.povertycalculator.money.checkCorrect;
+import com.calculator.poverty.dog.povertycalculator.money.CheckCorrect;
 
 import java.util.Date;
 
-import data.Calculation;
+import data.UseDatabase;
 import data.Lists;
 
 /**
@@ -54,7 +53,7 @@ public class Spent extends AppCompatActivity {
         TextView getComment = (TextView) findViewById(R.id.setSpentMoneyCommentText);
         comment = getComment.getText().toString();
 
-        checkCorrect check = new checkCorrect();
+        CheckCorrect check = new CheckCorrect();
         if (check.checkNumber(getMoney.getText().toString())){
             money = getMoney.getText().toString();
             if (!check.checkComment(comment)){
@@ -62,9 +61,9 @@ public class Spent extends AppCompatActivity {
             } else {
                 date = new Date();
                 ListMoney listMoney = new ListMoney(choseCategory, comment, date.toString(), money, "true");
-                Calculation calculation = new Calculation(this);
+                UseDatabase useDatabase = new UseDatabase(this);
 
-                calculation.addSpent(listMoney);
+                useDatabase.addSpent(listMoney);
                 Intent intent = new Intent(Spent.this, Money.class);
                 startActivity(intent);
             }

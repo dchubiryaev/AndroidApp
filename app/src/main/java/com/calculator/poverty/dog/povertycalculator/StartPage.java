@@ -34,8 +34,6 @@ public class StartPage extends AppCompatActivity {
 
     public void ButtonClickTasks(View view)
     {
-        Intent intObj = new Intent(this, Tasks.class);
-        startActivity(intObj);
     }
 
     @Override
