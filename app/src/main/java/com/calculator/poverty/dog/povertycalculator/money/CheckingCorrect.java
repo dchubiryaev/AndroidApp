@@ -1,12 +1,11 @@
 package com.calculator.poverty.dog.povertycalculator.money;
 
 /**
- * Created by DoG on 17.10.2017.
+ * Created by DoG on 12.01.2018.
  */
 
-public class CheckCorrect {
-
-    public CheckCorrect(){
+public class CheckingCorrect {
+    public CheckingCorrect(){
     }
 
     //Need checkCorrectData on zero. Zero there is true!!!

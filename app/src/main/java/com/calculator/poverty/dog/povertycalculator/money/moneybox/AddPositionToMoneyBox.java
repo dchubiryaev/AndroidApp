@@ -12,8 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
+import com.calculator.poverty.dog.povertycalculator.money.CheckingCorrect;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
-import com.calculator.poverty.dog.povertycalculator.money.CheckCorrect;
 
 import data.UseDatabase;
 import data.Lists;
@@ -46,7 +46,7 @@ public class AddPositionToMoneyBox extends AppCompatActivity {
     //Button addlist
     public void addNewMoneyBox (View view) {
         TextView getComment = (TextView) findViewById(R.id.setSpentMoneyCommentText);
-        CheckCorrect check = new CheckCorrect();
+        CheckingCorrect check = new CheckingCorrect();
 
         if (check.checkComment(getComment.getText().toString())){
             comment = getComment.getText().toString();

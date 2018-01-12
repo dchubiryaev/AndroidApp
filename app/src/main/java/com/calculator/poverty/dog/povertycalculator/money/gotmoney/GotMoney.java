@@ -12,9 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
+import com.calculator.poverty.dog.povertycalculator.money.CheckingCorrect;
 import com.calculator.poverty.dog.povertycalculator.money.ListGotMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
-import com.calculator.poverty.dog.povertycalculator.money.CheckCorrect;
 
 import java.util.Date;
 
@@ -48,7 +48,7 @@ public class GotMoney extends AppCompatActivity {
 
     public void setGotMoney(View view) {
         TextView getMoney = (TextView) findViewById(R.id.setGotMoneyText);
-        CheckCorrect check = new CheckCorrect();
+        CheckingCorrect check = new CheckingCorrect();
         if (check.checkNumber(getMoney.getText().toString())){
             money = getMoney.getText().toString();
             date = new Date();

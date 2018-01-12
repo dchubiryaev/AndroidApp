@@ -12,9 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
+import com.calculator.poverty.dog.povertycalculator.money.CheckingCorrect;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
-import com.calculator.poverty.dog.povertycalculator.money.CheckCorrect;
 
 import java.util.ArrayList;
 
@@ -89,7 +89,7 @@ public class MoneyBox extends AppCompatActivity {
     public void addMoney(View view){
         final DatabaseSpentHelper thing = new DatabaseSpentHelper(this);
         TextView getMoney = (TextView) findViewById(R.id.setMoneyText);
-        CheckCorrect check = new CheckCorrect();
+        CheckingCorrect check = new CheckingCorrect();
 
         if (check.checkNumber(getMoney.getText().toString())){
             if (check.checkItem(listMoney)){

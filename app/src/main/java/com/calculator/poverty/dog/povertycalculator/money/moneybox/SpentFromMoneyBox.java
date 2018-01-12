@@ -13,14 +13,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.calculator.poverty.dog.povertycalculator.R;
+import com.calculator.poverty.dog.povertycalculator.money.CheckingCorrect;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
-import com.calculator.poverty.dog.povertycalculator.money.CheckCorrect;
 
 import java.util.Date;
 
 import data.UseDatabase;
-import data.DatabaseSpentHelper;
 import data.Lists;
 
 /**
@@ -123,7 +122,7 @@ public class SpentFromMoneyBox extends AppCompatActivity {
     }
 
     public boolean checkCorrectData(){
-        CheckCorrect check = new CheckCorrect();
+        CheckingCorrect check = new CheckingCorrect();
         if (!check.checkNumber(money)){
             openQuitDialog();
             return false;
