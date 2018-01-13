@@ -16,7 +16,6 @@ import com.calculator.poverty.dog.povertycalculator.R;
 import com.calculator.poverty.dog.povertycalculator.money.CheckingCorrect;
 import com.calculator.poverty.dog.povertycalculator.money.ListMoney;
 import com.calculator.poverty.dog.povertycalculator.money.Money;
-import com.calculator.poverty.dog.povertycalculator.money.spent.Spent;
 
 import java.util.Date;
 
@@ -34,7 +33,7 @@ public class SpentFromMoneyBox extends AppCompatActivity {
     private String comment;
     private Date date;
 
-    private String thingFromPreview;
+    private String commentFromPreview;
     private String moneyFromPreview;
     private String categoryFromPreview;
 
@@ -56,7 +55,7 @@ public class SpentFromMoneyBox extends AppCompatActivity {
 
     public void getRowsFromBeforeView(){
         Intent intent = getIntent();
-        thingFromPreview = intent.getStringExtra("comment");
+        commentFromPreview = intent.getStringExtra("comment");
         moneyFromPreview = intent.getStringExtra("money");
         categoryFromPreview = intent.getStringExtra("category");
     }
@@ -65,7 +64,7 @@ public class SpentFromMoneyBox extends AppCompatActivity {
         TextView spentMoneyText = (TextView)findViewById(R.id.setSpentMoneyText);
         spentMoneyText.setText("" + moneyFromPreview);
         TextView spentMoneyCommentText = (TextView)findViewById(R.id.setSpentMoneyCommentText);
-        spentMoneyCommentText.setText("" + thingFromPreview);
+        spentMoneyCommentText.setText("" + commentFromPreview);
     }
 
     public void setSpinner(){
@@ -103,7 +102,7 @@ public class SpentFromMoneyBox extends AppCompatActivity {
         }
         ListMoney spendList = new ListMoney(choseCategory, comment, date.toString(), money, "true");
         int computation = Integer.parseInt(moneyFromPreview)-Integer.parseInt(money);
-        ListMoney ListInMoneyBox = new ListMoney(categoryFromPreview, thingFromPreview, date.toString(), computation +"", "false");
+        ListMoney ListInMoneyBox = new ListMoney(categoryFromPreview, commentFromPreview, date.toString(), computation +"", "false");
         UseDatabase useDatabase = new UseDatabase(this);
         useDatabase.addSpent(spendList);
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
@@ -144,7 +143,6 @@ public class SpentFromMoneyBox extends AppCompatActivity {
     private void openQuitDialog() {
         AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
         quitDialog.setTitle("Enter correct numbers!");
-        System.out.println("bla bla");
 
         quitDialog.setNegativeButton("Ok!", new DialogInterface.OnClickListener() {
             @Override
@@ -168,7 +166,7 @@ public class SpentFromMoneyBox extends AppCompatActivity {
 
     private void openQuitDialogMoney() {
         AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
-        quitDialog.setTitle("Money can not be more than : " + moneyFromPreview + ". You can increase this in money box.");
+        quitDialog.setTitle("Money can not be more than : " + moneyFromPreview + ". You can increase in money box.");
 
         quitDialog.setNegativeButton("Ok!", new DialogInterface.OnClickListener() {
             @Override

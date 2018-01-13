@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DatabaseEarnHelper extends Database {
 
-    private static final String TABLE_NAME = "getMoney";
+    private static final String TABLE_NAME = "gotMoney";
     private static final String KEY_ID = "_id";
     private static final String KEY_CATEGORY = "category";
     private static final String KEY_MONEY = "money";

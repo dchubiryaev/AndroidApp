@@ -86,6 +86,7 @@
             android:id="@+id/listView"
             android:layout_width="340dp"
             android:layout_height="290dp"
+            android:gravity="center"
             android:background="@drawable/outline_background"
             android:listSelector="@color/colorPrimaryDark"></ListView>
 

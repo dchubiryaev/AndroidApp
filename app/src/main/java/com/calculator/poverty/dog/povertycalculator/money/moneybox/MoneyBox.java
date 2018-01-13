@@ -80,8 +80,8 @@ public class MoneyBox extends AppCompatActivity {
     }
 
     public void setListView () {
-        final DatabaseSpentHelper thing = new DatabaseSpentHelper(this);
-        data = thing.getThingNotSpent();
+        final DatabaseSpentHelper databaseSpentHelper = new DatabaseSpentHelper(this);
+        data = databaseSpentHelper.getThingNotSpent();
         lv = (ListView) this.findViewById(R.id.listView);
         lv.setAdapter(new MoneyBoxAdapter(this,data));
 
@@ -93,7 +93,7 @@ public class MoneyBox extends AppCompatActivity {
     }
 
     public void addMoney(View view){
-        final DatabaseSpentHelper thing = new DatabaseSpentHelper(this);
+        final DatabaseSpentHelper databaseSpentHelper = new DatabaseSpentHelper(this);
         TextView getMoney = (TextView) findViewById(R.id.setMoneyText);
         CheckingCorrect check = new CheckingCorrect();
 
@@ -103,7 +103,7 @@ public class MoneyBox extends AppCompatActivity {
                 int addMoney = Integer.parseInt(getMoney.getText().toString());
                 int sum = beforeMoney + addMoney;
                 listMoney.setMoney(""+sum);
-                thing.updateListInMoneyBoxToDB(listMoney);
+                databaseSpentHelper.updateListInMoneyBoxToDB(listMoney);
                 getMoney.setText("");
                 recreate();
             } else {

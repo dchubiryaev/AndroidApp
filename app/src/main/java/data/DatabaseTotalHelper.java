@@ -18,10 +18,9 @@ import java.util.List;
 
 public class DatabaseTotalHelper extends Database {
 
-    private static final String TABLE_NAME = "totals";
+    private static final String TABLE_NAME = "balance";
     private static final String KEY_ID = "_id";
     private static final String KEY_BALANCE = "balance";
-    private static final String KEY_SEGMENT = "segment";
 
     public DatabaseTotalHelper(Context context) {
         super(context);
@@ -34,14 +33,6 @@ public class DatabaseTotalHelper extends Database {
 
     public int getBalance (){
         String selectQuery = "SELECT " + KEY_BALANCE + " FROM " + TABLE_NAME + " WHERE " + KEY_ID + " IN ('1')";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        cursor.moveToFirst();
-        return Integer.parseInt(cursor.getString(0));
-    }
-
-    public int getSegment (){
-        String selectQuery = "SELECT " + KEY_SEGMENT + " FROM " + TABLE_NAME + " WHERE " + KEY_ID + " IN ('1')";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToFirst();
