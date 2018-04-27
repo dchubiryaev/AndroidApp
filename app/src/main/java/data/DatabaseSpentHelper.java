@@ -46,39 +46,8 @@ public class DatabaseSpentHelper extends Database {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(KEY_MONEY, listMoney.getMoney());
-
-        String selectQuery = "SELECT  * FROM " + TABLE_SPENT + " WHERE " + KEY_FLAG + " IN ('false')";
-
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst()) {
-            do {
-                System.out.println("new cursor");
-                System.out.println("string 0 id" + cursor.getString(0));
-                System.out.println("string 1 cat" + cursor.getString(1));
-                System.out.println("string 2 comm" + cursor.getString(2));
-                System.out.println("string 3 money" + cursor.getString(3));
-                System.out.println("string 4 date" + cursor.getString(4));
-                System.out.println("string 5 flag" + cursor.getString(5));
-            } while (cursor.moveToNext());
-        }
-
-        System.out.println("check " + listMoney.getComment());
         // update: TABLE_NAME, VALUES, WHERE(thing] =, listMoney,getComment
         db.update(TABLE_SPENT, value, "flag = ? AND comment = ?", new String[] {"false", listMoney.getComment()});
-
-        Cursor cursor2 = db.rawQuery(selectQuery, null);
-        if (cursor2.moveToFirst()) {
-            do {
-                System.out.println("new cursor");
-                System.out.println("string 0 id" + cursor2.getString(0));
-                System.out.println("string 1 cat" + cursor2.getString(1));
-                System.out.println("string 2 comm" + cursor2.getString(2));
-                System.out.println("string 3 money" + cursor2.getString(3));
-                System.out.println("string 4 date" + cursor2.getString(4));
-                System.out.println("string 5 flag" + cursor2.getString(5));
-            } while (cursor2.moveToNext());
-        }
-
         db.close();
     }
 

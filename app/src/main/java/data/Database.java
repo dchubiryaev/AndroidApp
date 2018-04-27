@@ -16,7 +16,7 @@ import java.io.OutputStream;
 
 public class Database extends SQLiteOpenHelper {
 
-    protected static final int DATABASE_VERSION = 5;
+    protected static final int DATABASE_VERSION = 6;
 
     protected static String DB_NAME = "calc_db.db";
     protected static String DB_PATH = "";

@@ -18,9 +18,10 @@ import java.util.List;
 
 public class DatabaseTotalHelper extends Database {
 
-    private static final String TABLE_NAME = "balance";
+    private static final String TABLE_NAME = "total";
     private static final String KEY_ID = "_id";
     private static final String KEY_BALANCE = "balance";
+    private static final String KEY_SUMBUSINESS = "sumbusiness";
 
     public DatabaseTotalHelper(Context context) {
         super(context);
